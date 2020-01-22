@@ -33,4 +33,18 @@ def get_books():
     return jsonify(books)
 
 
+@app.route("/api/v1/books/<int:id>", methods=["GET"])
+def get_book(id):
+
+    result = []
+
+    for book in books:
+        if book['id'] == id:
+            print(book)
+            result.append(book)
+    if len(result) == 0:
+        return jsonify({"status": 404, "message": "No book with id "+str(id)}), 404
+    return jsonify(result)
+
+
 app.run()
